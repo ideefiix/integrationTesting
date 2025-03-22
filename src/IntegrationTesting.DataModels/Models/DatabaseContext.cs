@@ -12,5 +12,8 @@ public class DatabaseContext : DbContext
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Command>()
+            .Property(c => c.Action)
+            .HasConversion(c => c.ToString(), str => Enum.Parse<ActionType>(str));
     }
 }
